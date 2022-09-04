@@ -10,7 +10,7 @@
 #include <string>
 #include <wchar.h>
 
-#include "structs.h" // must include structures
+#include "structs.h"
 
 template <typename T>
 void WPM(HANDLE handleProcess, LPVOID address, const T& value)
@@ -26,7 +26,7 @@ void print_ctrl()
 	std::cout << "[Numpad 3]	Teleport using X, Y and Z co-ordinates\r\n";
 }
 
-void godMode(uintptr_t health_address, HANDLE handleProcess)
+void god_mode(uintptr_t health_address, HANDLE handleProcess)
 {
 	int newHealth = 999999;
 	WPM(handleProcess, health_address, newHealth);
@@ -37,7 +37,7 @@ void godMode(uintptr_t health_address, HANDLE handleProcess)
 	print_ctrl();
 }
 
-void infinitePrimary(uintptr_t pweap_address, uintptr_t pReserve_address, uintptr_t sweap_address, uintptr_t sReserve_address, HANDLE handleProcess)
+void infinite_ammo(uintptr_t pweap_address, uintptr_t pReserve_address, uintptr_t sweap_address, uintptr_t sReserve_address, HANDLE handleProcess)
 {
 	int newAmmo = 99999;
 	WPM(handleProcess, pweap_address, newAmmo);
@@ -52,7 +52,7 @@ void infinitePrimary(uintptr_t pweap_address, uintptr_t pReserve_address, uintpt
 	print_ctrl();
 }
 
-void infinitearmor(uintptr_t armor_address, HANDLE handleProcess)
+void infinite_armor(uintptr_t armor_address, HANDLE handleProcess)
 {
 	int newarmor = 99999;
 	WPM(handleProcess, armor_address, newarmor);
@@ -186,13 +186,13 @@ int main()
 			while (true)
 			{
 				if(GetAsyncKeyState(VK_NUMPAD0) & 0x8000) {
-					godMode(health_address, hProcess);
+					god_mode(health_address, hProcess);
 				}
 				else if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000) {
 					infinite_ammo(primaryweap_address, primaryweap_sec_address, secondaryweap_address, secondaryweap_sec_address, hProcess);
 				}
 				else if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000) {
-					infinitearmor(armor_address, hProcess);
+					infinite_armor(armor_address, hProcess);
 				}
 				else if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000) {
 					teleport(pos_address, hProcess);
